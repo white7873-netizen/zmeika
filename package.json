@@ -1,4 +1,6 @@
 "homepage": "https://white7873-netizen.github.io/zmeika",
+"predeploy": "npm run build",
+"deploy": "gh-pages -d build"
 {
   "name": "sandbox-workspace",
   "private": true,
