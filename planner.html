@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Планировщик переговорки</title>
+<link rel="stylesheet" href="planner.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">📅</div>
+      <div>
+        <h1 id="roomName">Переговорная</h1>
+        <p class="subtitle">Планирование встреч · одна переговорка</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="tabs">
+        <button class="tab-btn active" data-view="day">День</button>
+        <button class="tab-btn" data-view="week">Неделя</button>
+        <button class="tab-btn" data-view="list">Список</button>
+      </div>
+      <div class="nav-group" id="navGroup">
+        <button class="icon-btn" id="btnPrev" title="Назад (←)">‹</button>
+        <button class="today-btn" id="btnToday">Сегодня</button>
+        <button class="icon-btn" id="btnNext" title="Вперёд (→)">›</button>
+      </div>
+      <button class="primary-btn" id="newBtn">+ Новая встреча</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Дневной вид -->
+    <section id="viewDay" class="view">
+      <div class="day-header">
+        <h2 id="dateTitle"></h2>
+        <span id="dateWeekday" class="weekday"></span>
+      </div>
+      <div class="day-layout">
+        <div class="grid-wrap">
+          <div class="time-gutter" id="timeLabels"></div>
+          <div class="grid-area">
+            <div class="day-grid" id="dayGrid"></div>
+            <div class="events-layer" id="eventsLayer"></div>
+            <div class="now-line" id="nowLine" style="display:none"></div>
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div class="stats">
+            <div class="stat"><span id="statCount">0</span><label>встреч</label></div>
+            <div class="stat"><span id="statHours">0</span><label>часов занято</label></div>
+          </div>
+          <h3>Расписание дня</h3>
+          <div id="dayList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Недельный вид -->
+    <section id="viewWeek" class="view" style="display:none">
+      <div class="day-header">
+        <h2 id="weekLabel"></h2>
+      </div>
+      <div id="weekBody"></div>
+    </section>
+
+    <!-- Список -->
+    <section id="viewList" class="view" style="display:none">
+      <div class="day-header"><h2>Предстоящие бронирования</h2></div>
+      <div id="allList" class="all-list"></div>
+    </section>
+  </main>
+
+  <!-- Модальное окно -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="modalTitle">Новая встреча</h3>
+        <button class="icon-btn" id="closeModal">✕</button>
+      </div>
+      <div class="conflict-box" id="conflictBox" style="display:none"></div>
+      <div class="form">
+        <label>Дата
+          <input type="date" id="f-date" />
+        </label>
+        <div class="row">
+          <label>Начало <input type="time" id="f-start" step="900" /></label>
+          <label>Окончание <input type="time" id="f-end" step="900" /></label>
+        </div>
+        <label>Название встречи *
+          <input type="text" id="f-title" placeholder="Напр.: Дейли команды" maxlength="80" />
+        </label>
+        <label>Организатор *
+          <input type="text" id="f-org" placeholder="Имя организатора" maxlength="40" />
+        </label>
+        <label>Участники
+          <input type="text" id="f-att" placeholder="Через запятую" maxlength="120" />
+        </label>
+        <label>Заметка
+          <textarea id="f-note" rows="2" placeholder="Оборудование, ссылка на созвон и т.п." maxlength="300"></textarea>
+        </label>
+        <label>Цвет
+          <div class="palette" id="colorPalette"></div>
+        </label>
+      </div>
+      <div class="modal-foot">
+        <button class="danger-btn" id="deleteBtn" style="display:none">Удалить</button>
+        <span class="spacer"></span>
+        <button class="ghost-btn" id="cancelBtn">Отмена</button>
+        <button class="primary-btn" id="saveBtn">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="planner.js"></script>
+</body>
+</html>
